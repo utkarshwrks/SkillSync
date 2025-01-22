@@ -4,3 +4,5 @@ pip install pandas
 pip install numpy
 pip install scikit-learn
 pip install PyPDF2
+pip install mysqlclient
+pip install pillow
