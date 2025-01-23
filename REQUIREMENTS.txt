@@ -6,3 +6,5 @@ pip install scikit-learn
 pip install PyPDF2
 pip install mysqlclient
 pip install pillow
+#23-01-2025
+pip install djangorestframework
