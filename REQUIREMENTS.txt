@@ -9,3 +9,4 @@ pip install pillow
 #23-01-2025
 pip install djangorestframework
 pip install django-cors-headers
+npm install axios
