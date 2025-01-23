@@ -10,3 +10,4 @@ pip install pillow
 pip install djangorestframework
 pip install django-cors-headers
 npm install axios
+npm install react-router-dom(24.04.2025)
