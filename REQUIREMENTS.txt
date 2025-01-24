@@ -11,3 +11,7 @@ pip install djangorestframework
 pip install django-cors-headers
 npm install axios
 npm install react-router-dom(24.04.2025)
+#24-01-2025
+pip install docx2pdf
+pip install pywin32
+
