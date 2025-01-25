@@ -1,0 +1,300 @@
+/* From Uiverse.io by doniaskima */
+.btn-53,
+.btn-53 *,
+.btn-53 :after,
+.btn-53 :before,
+.btn-53:after,
+.btn-53:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-53 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+
+.btn-53:disabled {
+  cursor: default;
+}
+
+.btn-53:-moz-focusring {
+  outline: auto;
+}
+
+.btn-53 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.btn-53 [hidden] {
+  display: none;
+}
+
+.btn-53 {
+  border: 1px solid;
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  overflow: hidden;
+  padding: 1.2rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.btn-53 .original {
+  background: #070707;
+  color: #f4efef;
+  display: grid;
+  inset: 0;
+  place-content: center;
+  position: absolute;
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.btn-53:hover .original {
+  transform: translateY(100%);
+}
+
+.btn-53 .letters {
+  display: inline-flex;
+}
+
+.btn-53 span {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
+}
+
+.btn-53 span:nth-child(2n) {
+  transform: translateY(15px);
+}
+
+.btn-53:hover span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-53:hover span:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.btn-53:hover span:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.btn-53:hover span:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.btn-53:hover span:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+.btn-53:hover span:nth-child(6) {
+  transition-delay: 0.5s;
+}
+
+/* Keyframes for slide-down animation */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    /* Start slightly above */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /* End at original position */
+  }
+}
+
+/* Navbar hidden by default */
+.navbar {
+  display: none;
+  opacity: 0;
+}
+
+/* Show navbar on hover with animation */
+.navbar-container:hover .navbar,
+.navbar:hover {
+  display: flex;
+  /* Ensure it's visible */
+  animation: slideDown 0.3s ease-in-out forwards;
+  /* Apply keyframes animation */
+}
+
+#bar2 {
+  transition-duration: .8s;
+}
+
+#bar1,
+#bar3 {
+  width: 50%;
+}
+
+#checkbox:checked+.toggle .bars {
+  position: absolute;
+  transition-duration: .5s;
+}
+
+#checkbox:checked+.toggle #bar2 {
+  transform: scaleX(0);
+  transition-duration: .5s;
+}
+
+#checkbox:checked+.toggle #bar1 {
+  width: 100%;
+  transform: rotate(45deg);
+  transition-duration: .5s;
+}
+
+#checkbox:checked+.toggle #bar3 {
+  width: 100%;
+  transform: rotate(-45deg);
+  transition-duration: .5s;
+}
+
+#checkbox:checked+.toggle {
+  transition-duration: .5s;
+  transform: rotate(180deg);
+}
+
+.before-navbar {
+  backdrop-filter: blur(10px 5px);
+}
+
+@media (min-width:100px) and (max-width:800px) {
+  .before-navbar {
+    display: none;
+  }
+
+  .navbar-container:hover .navbar,
+  .navbar:hover {
+    animation: none;
+  }
+
+  .after-navbar {
+    display: flex;
+    opacity: 1;
+  }
+
+  .list-items {
+    display: none;
+  }
+
+  .btn-div {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  .content-div {
+    height: 70rem;
+  }
+
+  .hamburger-menu {
+    animation: swipeLeft 0.5s ease-in-out forwards;
+  }
+}
+
+@media (min-width:800px) and (max-width:1100px) {
+  .before-navbar {
+    display: none;
+  }
+
+  .navbar-container:hover .navbar,
+  .navbar:hover {
+    animation: none;
+  }
+
+  .after-navbar {
+    display: flex;
+    opacity: 1;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+
+  .list-item-div {
+    padding-right: 8rem;
+    padding-left: 12rem;
+  }
+
+  .nav-before-tab {
+    display: none;
+  }
+}
+
+.nav-items {
+  margin-left: 6rem;
+}
+
+.hamburger-tab-menu {
+  margin-left: 5rem;
+  animation: swipeLeftNav 0.5s ease-in-out forwards;
+}
+
+@media (min-width:1200px) {
+  .hamburger-menu {
+    display: none;
+  }
+
+  .hamburger-tab-menu {
+    display: none;
+  }
+}
+
+/* For hamburger-menu */
+@keyframes swipeLeft {
+  0% {
+    opacity: 0.5;
+    transform: translateX(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes swipeLeftNav {
+  0% {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+
+  30% {
+    opacity: 0.2;
+  }
+
+  60% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
