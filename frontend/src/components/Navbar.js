@@ -80,7 +80,7 @@ export default function Navbar({ toggleMenu }) {
               <button className="text-white font-bold hover:text-blue-500">Sign Up</button>
             </a>
             <a href="/">
-              <button className="text-black bg-blue-500 h-9 w-16 mx-3 my-[6px] rounded-xl font-bold hover:bg-black hover:text-blue-500">
+              <button href= "/login" className="text-black bg-blue-500 h-9 w-16 mx-3 my-[6px] rounded-xl font-bold hover:bg-black hover:text-blue-500">
                 Log In
               </button>
             </a>
