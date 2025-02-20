@@ -1,4 +1,4 @@
-/* From Uiverse.io by doniaskima */
+/* Styling of main page */
 .btn-53,
 .btn-53 *,
 .btn-53 :after,
@@ -14,6 +14,7 @@
   -webkit-appearance: button;
   background-color: #000;
   background-image: none;
+  box-shadow: 20px 20px 60px #000;
   color: #fff;
   cursor: pointer;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -44,8 +45,9 @@
 }
 
 .btn-53 {
-  border: 1px solid;
-  border-radius: 999px;
+  border: 3px solid white;
+  border-radius: 50px;
+  /* Keep it rounded */
   box-sizing: border-box;
   display: block;
   font-weight: 900;
@@ -53,6 +55,20 @@
   padding: 1.2rem 3rem;
   position: relative;
   text-transform: uppercase;
+  background: #070707;
+  color: #f4efef;
+
+  /* Updated shadow for visibility */
+  box-shadow: 10px 10px 30px rgba(255, 255, 255, 0.1),
+    0px 0px 40px rgba(0, 0, 0, 1);
+
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.btn-53:hover {
+  /* Stronger shadow on hover */
+  box-shadow: 15px 15px 40px rgba(255, 255, 255, 0.2),
+    0px 0px 50px rgba(0, 0, 0, 1);
 }
 
 .btn-53 .original {
@@ -62,8 +78,11 @@
   inset: 0;
   place-content: center;
   position: absolute;
-  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+  /* Inner shadow effect */
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2),
+    5px 5px 15px rgba(0, 0, 0, 0.6);
 }
+
 
 .btn-53:hover .original {
   transform: translateY(100%);
@@ -107,6 +126,50 @@
 .btn-53:hover span:nth-child(6) {
   transition-delay: 0.5s;
 }
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.floating {
+  animation: floatAnimation 3s ease-in-out infinite;
+}
+
+/* Different delays for each image */
+.img2 {
+  animation-delay: 0s;
+}
+
+.img3 {
+  animation-delay: 0.5s;
+}
+
+.img4 {
+  animation-delay: 1s;
+}
+
+.img5 {
+  animation-delay: 1.5s;
+}
+
+.img6 {
+  animation-delay: 2s;
+}
+
+.img7 {
+  animation-delay: 2.5s;
+}
+
 
 /* Keyframes for slide-down animation */
 @keyframes slideDown {
@@ -210,11 +273,30 @@
   }
 
   .hamburger-menu {
+    position: fixed;
+    /* Ensure it's floating above content */
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    /* Full screen height */
+    background-color: black;
+    color: white;
+    z-index: 50;
+    /* Make sure it's above content */
     animation: swipeLeft 0.5s ease-in-out forwards;
   }
 
   .skillsync-2 {
     visibility: visible;
+  }
+
+  .background {
+    display: none;
+  }
+
+  .hamburger {
+    z-index: 100;
   }
 }
 
@@ -264,7 +346,7 @@
   animation: swipeLeftNav 0.5s ease-in-out forwards;
 }
 
-@media (min-width:1200px) {
+@media (min-width:1200px) and (max-width:2000px) {
   .hamburger-menu {
     display: none;
   }
@@ -306,6 +388,7 @@
     transform: translateX(0);
   }
 }
+
 .card-container {
   position: relative;
   perspective: 1000px;
@@ -327,4 +410,24 @@
 
 .page.back {
   transform: rotateY(180deg);
+}
+
+/* Responsiveness for login page */
+.page {
+  border-radius: 20px;
+}
+
+@media(min-width:100px) and (max-width:800px) {
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38rem;
+  }
+
+  .page {
+    width: 90%;
+    height: 85%;
+  }
+
 }

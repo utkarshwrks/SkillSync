@@ -74,6 +74,7 @@ export default function SignIn() {
 
     return (
         <>
+        <div className="mt-14">
             <h1 className="text-4xl font-serif text-center pt-2 text-[#565353]">Welcome to SkillSync!</h1>
             <div className="flex justify-center items-center">
                 <div
@@ -278,6 +279,7 @@ export default function SignIn() {
                     </div>
                 </div>
             </div>
+         </div>
         </>
     );
 }

@@ -23,7 +23,7 @@ export default function Navbar({ toggleMenu }) {
           </div>
           </Link>
           <div className="w-[50%] flex justify-end">
-            <Link to="/login">
+            <Link to="/login/">
               <button className="relative z-10 text-black bg-blue-500 h-9 w-16 mx-3 my-[6px] rounded-xl font-bold hover:bg-transparent hover:text-blue-500">
                 Log In
               </button>
