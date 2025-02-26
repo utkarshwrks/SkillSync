@@ -26,8 +26,11 @@ SECRET_KEY = 'django-insecure-$hdtc%^dce17kl%6#1$i(t5_%2u9o6u$m#d!es=jfo9*h+9#n%
 DEBUG = True
 
 ALLOWED_HOSTS = ['skillsync.com', 'kaustubhcode.com', '127.0.0.1']
-
-# Application definition
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "https://skillsync.com"]  # Add frontend URL
+# Allow React frontend to access Django API
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React dev server
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,10 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8000",  # Update this if needed
 ]
 
 ROOT_URLCONF = 'backend.urls'

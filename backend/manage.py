@@ -15,6 +15,11 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+
+    # Set default port to 3000 when running `runserver`
+    if "runserver" in sys.argv and len(sys.argv) == 2:
+        sys.argv.append("127.0.0.1:3000") 
+
     execute_from_command_line(sys.argv)
 
 
