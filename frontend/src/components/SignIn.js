@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './components.css';
 import eyebrowImg from './eyebrow.png';
-
+import axios from "axios";
 
 export default function SignIn() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false); // For confirm password visibility
     const [pupilPosition, setPupilPosition] = useState({ x: 32, y: 32 });
+    
+    const [loginData, setLoginData] = useState({ username: '', password: '' });
+    const [registerData, setRegisterData] = useState({
+        username: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirm_password: ''
+    });
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -71,6 +80,34 @@ export default function SignIn() {
         const leftMostX = centerX - 16; // Adjusted to match the left side of the eye
         setPupilPosition({ x: leftMostX, y: centerY });
     };
+    
+    const handleChange = (e, formType) => {
+        const { name, value } = e.target;
+        formType === "login"
+            ? setLoginData({ ...loginData, [name]: value })
+            : setRegisterData({ ...registerData, [name]: value });
+    };
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/login/", loginData);
+            alert(response.data.message);
+        } catch (error) {
+            alert(error.response?.data?.message || "Login failed!");
+        }
+    };
+
+    const handleRegisterSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/register/", registerData);
+            alert(response.data.message);
+            setIsFlipped(false);
+        } catch (error) {
+            alert(error.response?.data?.message || "Registration failed!");
+        }
+    };
 
     return (
         <>
@@ -85,19 +122,25 @@ export default function SignIn() {
                     {/* Login Page */}
                     <div className="page front h-full w-full bg-[#d8e8eae6]">
                         <h2 className="text-3xl font-serif text-center mt-14 font-bold">Login</h2>
-                        <form className="flex flex-col justify-center items-center h-[50%]">
-                            <input
-                                type="text"
-                                className="h-10 w-80 mt-5 rounded-xl pl-3 font-serif outline-none"
-                                placeholder="Username"
-                            />
-                            <div className="relative mt-5">
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    className="h-10 w-80 rounded-xl pl-3 font-serif outline-none"
-                                    placeholder="Password"
-                                    onFocus={handlePasswordFocus} // Focus event to move the pupil left
-                                />
+                        <form className="flex flex-col justify-center items-center h-[50%]" onSubmit={handleLoginSubmit}>
+                         <input
+                          type="text"
+                          className="h-10 w-80 mt-5 rounded-xl pl-3 font-serif outline-none"
+                          placeholder="Username"
+                          name="username"
+                          value={loginData.username}  // ✅ Bind state
+                          onChange={(e) => handleChange(e, "login")}  // ✅ Update state on change
+                          />
+                    <div className="relative mt-5">
+                     <input
+                      type={showPassword ? 'text' : 'password'}
+                      className="h-10 w-80 rounded-xl pl-3 font-serif outline-none"
+                      placeholder="Password"
+                      name="password"
+                      value={loginData.password}  // ✅ Bind state
+                      onChange={(e) => handleChange(e, "login")}  // ✅ Update state on change
+                      onFocus={handlePasswordFocus}
+                      />
                                 <button
                                     type="button"
                                     className="absolute right-3 top-2 text-blue-500 flex items-center justify-center"
@@ -156,27 +199,39 @@ export default function SignIn() {
                     {/* Register Page */}
                     <div className="page back h-full w-full bg-[#dbe1e1cc]">
                         <h2 className="text-3xl font-serif text-center mt-10 font-bold">Register</h2>
-                        <form className="flex flex-col justify-center items-center h-[70%]">
+                        <form className="flex flex-col justify-center items-center h-[70%]" method='POST' onSubmit={handleRegisterSubmit}>
                             <input
-                                type="text"
-                                className="h-10 w-80 mt-2 rounded-xl pl-3 font-serif outline-none"
-                                placeholder="Username"
+                            type="text"
+                            className="h-10 w-80 mt-2 rounded-xl pl-3 font-serif outline-none"
+                            placeholder="Username"
+                            name="username"
+                            value={registerData.username}  // ✅ Bind state
+                            onChange={(e) => handleChange(e, "register")}  // ✅ Update state on change
                             />
                             <input
                                 type="email"
                                 className="h-10 w-80 mt-5 rounded-xl pl-3 font-serif outline-none"
                                 placeholder="E-mail"
+                                name="email"
+                                value={registerData.email}  // ✅ Bind state
+                                onChange={(e) => handleChange(e, "register")}  // ✅ Update state on change
                             />
                             <input
                                 type="text"
                                 className="h-10 w-80 mt-5 rounded-xl pl-3 font-serif outline-none"
                                 placeholder="Mobile No."
+                                name="phone"
+                                value={registerData.phone}  // ✅ Bind state
+                                onChange={(e) => handleChange(e, "register")}  // ✅ Update state on change
                             />
                             <div className="relative mt-5">
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     className="h-10 w-80 rounded-xl pl-3 font-serif outline-none"
                                     placeholder="Password"
+                                    name="password"
+                                    value={registerData.password}  // ✅ Bind state
+                                    onChange={(e) => handleChange(e, "register")}  // ✅ Update state on change
                                     onFocus={handlePasswordFocus} // Focus event to move the pupil left
                                 />
                                 <button
@@ -223,6 +278,9 @@ export default function SignIn() {
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     className="h-10 w-80 rounded-xl pl-3 font-serif outline-none"
                                     placeholder="Confirm Password"
+                                    name="confirm_password"
+                                    value={registerData.confirm_password}  // ✅ Bind state
+                                    onChange={(e) => handleChange(e, "register")}  // ✅ Update state on change
                                 />
                                 <button
                                     type="button"

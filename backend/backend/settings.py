@@ -25,11 +25,12 @@ SECRET_KEY = 'django-insecure-$hdtc%^dce17kl%6#1$i(t5_%2u9o6u$m#d!es=jfo9*h+9#n%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['skillsync.com', 'kaustubhcode.com', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "https://skillsync.com"]  # Add frontend URL
-# Allow React frontend to access Django API
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
+
+# CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React dev server
+    "http://127.0.0.1:3000",  # React dev server
 ]
 
 INSTALLED_APPS = [
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'resume',
+        'NAME': 'skillsyncdb',
         'USER': 'Sayman',
         'PASSWORD': 'Sayman@2007',
         'HOST': 'localhost',

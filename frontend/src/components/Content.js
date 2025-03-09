@@ -104,7 +104,7 @@ export default function Content() {
 
             </div>
             <div className='relative bottom-0'>
-                <img className='h-[13.5rem] w-full' src={img1} alt="" />
+                <img className='h-[18rem] w-full' src={img1} alt="" />
             </div>
         </div>
     );

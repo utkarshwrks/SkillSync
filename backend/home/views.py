@@ -26,6 +26,12 @@ import json
 from fpdf import FPDF
 import io
 from .models import Resume
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Contact
+from .serializer import ContactSerializer
+from rest_framework import status
+
 # Configure Generative AI API
 genai.configure(api_key="AIzaSyAMHEgaEy6cAJK0bfziGAcLohnbECPyQE8")
 model = genai.GenerativeModel("gemini-1.5-flash")
@@ -288,47 +294,26 @@ def job_search_view(request):
     return render(request, "ijobs.html", {"jobs": jobs, "skill": skill})
 
 #KaustubhSen
+@api_view(['POST'])
 def register(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-
-        if password1 != password2:
-            messages.error(request, "Passwords do not match!")
-            return redirect('register')
-
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already taken!")
-            return redirect('register')
-
-        if User.objects.filter(email=email).exists():
-            messages.error(request, "Email already registered!")
-            return redirect('register')
-
-        # Create the user
-        user = User.objects.create_user(username=username, email=email, password=password1)
-        user.save()
-        messages.success(request, "Registration successful! Please log in.")
-        return redirect('login')
-    return render(request, 'register.html')
+    serializer = ContactSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"message": "Registration successful!"}, status=status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['POST'])
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Login successful!")
-            return redirect('home')  # Replace with your dashboard or home page
-        else:
-            messages.error(request, "Invalid username or password!")
-            return redirect('home')
-    return render(request, 'index.html')
+    username = request.data.get("username")
+    password = request.data.get("password")
+    
+    user = authenticate(username=username, password=password)
+    if user:
+        return Response({"message": "Login successful!", "username": user.username}, status=200)
+    return Response({"error": "Invalid credentials"}, status=401)
 
 
 
