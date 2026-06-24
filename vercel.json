@@ -1,26 +1,7 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "SkillSync/backend/wsgi.py",
-        "use": "@vercel/python",
-        "config": {
-          "maxLambdaSize": "15mb",
-          "runtime": "python3.12",
-          "installCommand": "apt-get update && apt-get install -y libmariadb-dev"
-        }
-      },
-      {
-        "src": "/static/*",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      { "src": "/static/(.*)", "dest": "/staticfiles/$1" },
-      {
-        "src": "/(.*)",
-        "dest": "SkillSync/backend/wsgi.py"
-      }
-    ]
-  }
-  
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/build",
+  "devCommand": "cd frontend && npm start",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

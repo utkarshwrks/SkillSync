@@ -1,1 +1,26 @@
-node_modules
+# ─── Secrets / env ───
+.env
+.env.local
+*.env
+
+# ─── Python / Django ───
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.sqlite3
+db.sqlite3
+backend/media/
+backend/staticfiles/
+
+# ─── Node / React ───
+node_modules/
+frontend/build/
+.npm/
+
+# ─── Editor / OS ───
+.DS_Store
+.idea/
+.vscode/
+*.log
