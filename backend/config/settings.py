@@ -34,6 +34,14 @@ SECRET_KEY = os.environ.get(
 )
 DEBUG = env_bool("DJANGO_DEBUG", True)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,.vercel.app")
+# Render injects the public hostname at runtime — trust it automatically so we
+# don't have to hard-code the .onrender.com domain in env vars.
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    CSRF_TRUSTED_ORIGINS_RENDER = [f"https://{RENDER_EXTERNAL_HOSTNAME}"]
+else:
+    CSRF_TRUSTED_ORIGINS_RENDER = []
 
 # --- Applications -----------------------------------------------------------
 INSTALLED_APPS = [
@@ -139,7 +147,7 @@ CORS_ALLOWED_ORIGINS = env_list(
 )
 CSRF_TRUSTED_ORIGINS = env_list(
     "CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000"
-)
+) + CSRF_TRUSTED_ORIGINS_RENDER
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 

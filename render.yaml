@@ -1,0 +1,45 @@
+# Render Blueprint — one-click deploy for the SkillSync Django backend + Postgres.
+# In Render: New → Blueprint → pick this repo. Frontend deploys separately on Vercel.
+databases:
+  - name: skillsync-db
+    plan: free
+    databaseName: skillsync
+    user: skillsync
+
+services:
+  - type: web
+    name: skillsync-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
+    healthCheckPath: /api/health/
+    envVars:
+      # Wired automatically from the Postgres instance above.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: skillsync-db
+          property: connectionString
+      # Generated once by Render — never commit a real secret key.
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      # Render's public hostname is trusted automatically in settings.py via
+      # RENDER_EXTERNAL_HOSTNAME, so no need to hard-code it here.
+      - key: DJANGO_ALLOWED_HOSTS
+        value: ".onrender.com"
+      # Set these to your Vercel frontend URL after the frontend is deployed,
+      # e.g. https://skillsync.vercel.app  (comma-separate multiple).
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      # Optional API keys — features degrade gracefully if left blank.
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADZUNA_APP_ID
+        sync: false
+      - key: ADZUNA_APP_KEY
+        sync: false

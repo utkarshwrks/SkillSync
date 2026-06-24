@@ -22,5 +22,5 @@ feedparser==6.0.11
 # AI resume suggestions (free Gemini tier; optional — degrades gracefully)
 google-generativeai==0.8.4
 
-# Optional production database driver (uncomment when using Postgres)
-# psycopg2-binary==2.9.10
+# Production database driver (Postgres on Render/Railway)
+psycopg2-binary==2.9.10
